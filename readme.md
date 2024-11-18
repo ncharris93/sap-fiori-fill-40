@@ -64,4 +64,15 @@ Now the extension with a time sheet icon will appear in your Arc Extensions
 
 ## Configuration
 
-Change the number of hours entered by modifying the variable `hoursPerDay` in the `copy-me.js`
+### Chrome
+
+Default Number of Hours:
+
+- Change the number of hours entered by modifying the variable `hoursPerDay` in the `copy-me.js`
+
+### Arc
+
+Default Number of Hours:
+
+- Change the number of hours entered by modifying the variable `hoursPerDay` in the `copy-me.js`
+- [Re]upload the extension
