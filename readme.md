@@ -33,7 +33,7 @@ Math per 1,000 engineers:
 
 ### Arc
 
-Upload an extension
+Upload the extension
 
 1.  Get your hands on the `arc-extension` folder
 2.  From the file menu: `Extensions` » `Manage Extensions`
@@ -45,10 +45,9 @@ Now the extension with a time sheet icon will appear in your Arc Extensions
 
 ### Google Chrome
 
-Create a new bookmark
-
-1.  Give it whatever name you like
-2.  Paste the contents of the JS block above or `copy-me.js` into the `URL` field of the bookmark form
+1. Create a new bookmark
+2. Give it whatever name you like
+3. Paste the contents of the JS block above or `copy-me.js` into the `URL` field of the bookmark form
 
 ## How to Use
 
