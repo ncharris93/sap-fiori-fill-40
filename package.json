@@ -1,0 +1,16 @@
+{
+  "name": "one-click-timesheet",
+  "version": "1.0.0",
+  "description": "## What it is",
+  "main": "copy-me.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node ./scripts/convert-to-bookmarklet.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  }
+}

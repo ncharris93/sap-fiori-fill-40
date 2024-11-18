@@ -1,9 +1,9 @@
-;(function () {
-  var hoursPerDay = 8
+(function () {
+  var hoursPerDay = 8;
   var enterRecordsButtonId =
-    'application-zhcmtime-manage-component---worklist--editButton'
+    'application-zhcmtime-manage-component---worklist--editButton';
   var submitButtonId =
-    'application-zhcmtime-manage-component---worklist--OverviewSubmitButton'
+    'application-zhcmtime-manage-component---worklist--OverviewSubmitButton';
 
   var assignmentElementIds = [
     '__box15-__clone54-inner', // Monday
@@ -11,7 +11,7 @@
     '__box15-__clone56-inner', // Wednesday
     '__box15-__clone57-inner', // Thursday
     '__box15-__clone58-inner', // Friday
-  ]
+  ];
 
   var timePlusButtonIds = [
     '__input4-__clone54-incrementBtn', // Monday
@@ -19,22 +19,22 @@
     '__input4-__clone56-incrementBtn', // Wednesday
     '__input4-__clone57-incrementBtn', // Thursday
     '__input4-__clone58-incrementBtn', // Friday
-  ]
+  ];
 
   function getElementIdName(elementId) {
-    switch (elementId) {
+    switch (true) {
       case elementId.includes('54'):
-        return 'Monday'
+        return 'Monday';
       case elementId.includes('55'):
-        return 'Tuesday'
+        return 'Tuesday';
       case elementId.includes('56'):
-        return 'Wednesday'
+        return 'Wednesday';
       case elementId.includes('57'):
-        return 'Thursday'
+        return 'Thursday';
       case elementId.includes('58'):
-        return 'Friday'
+        return 'Friday';
       default:
-        return 'You working weekends or something?'
+        return 'You working weekends or something?';
     }
   }
 
@@ -45,78 +45,80 @@
       keyCode: 13,
       charCode: 13,
       bubbles: true,
-    })
-    element.dispatchEvent(enterEvent)
+    });
+    element.dispatchEvent(enterEvent);
   }
 
   function simulateDownArrow(element) {
-    element.focus()
+    element.focus();
     var downArrowEvent = new KeyboardEvent('keydown', {
       key: 'ArrowDown',
       code: 'ArrowDown',
       keyCode: 40,
       bubbles: true,
-    })
-    element.dispatchEvent(downArrowEvent)
+    });
+    element.dispatchEvent(downArrowEvent);
   }
 
   function simulateButtonClick(elementId, times = hoursPerDay) {
-    var buttonElement = document.getElementById(elementId)
-    var eleName = getElementIdName(elementId)
+    var buttonElement = document.getElementById(elementId);
+    var eleName = getElementIdName(elementId);
     if (buttonElement) {
       Array.from({ length: times }).forEach(() => {
-        buttonElement.click()
-      })
-      console.log(`Set ${eleName}'s time to ${times} hours`)
+        buttonElement.click();
+      });
+      console.log(`Set ${eleName}'s time to ${times} hours`);
     } else {
-      console.log(`Failed to find hour increment button for ${eleName}`)
+      console.log(`Failed to find hour increment button for ${eleName}`);
     }
   }
 
   function focusSubmitButton() {
-    var submitButton = document.getElementById(submitButtonId)
+    var submitButton = document.getElementById(submitButtonId);
     if (submitButton) {
-      submitButton.focus()
-      console.log('Submit Button Focused')
+      submitButton.focus();
+      console.log('Submit Button Focused');
     } else {
-      console.log('Failed to find Submit button ')
+      console.log('Failed to find Submit button ');
     }
   }
 
   function clickEnterRecordsButton(elementId) {
-    var enterRecordsButton = document.getElementById(elementId)
+    var enterRecordsButton = document.getElementById(elementId);
     if (enterRecordsButton) {
-      enterRecordsButton.click()
-      console.log('clicked Enter Records button!')
-      simulateEnterKey(enterRecordsButton)
+      enterRecordsButton.click();
+      console.log('clicked Enter Records button!');
+      simulateEnterKey(enterRecordsButton);
     } else {
-      console.log('Failed to find Enter Records button, quitting')
-      return
+      console.log('Failed to find Enter Records button, quitting');
+      return;
     }
   }
 
   function selectInputAndPressDownArrow(elementId) {
-    var eleName = getElementIdName(elementId)
-    var inputElement = document.getElementById(elementId)
+    var eleName = getElementIdName(elementId);
+    var inputElement = document.getElementById(elementId);
     if (inputElement) {
-      simulateDownArrow(inputElement)
-      simulateEnterKey(inputElement)
-      console.log(`Set ${eleName}'s Assignment`)
+      simulateDownArrow(inputElement);
+      simulateEnterKey(inputElement);
+      console.log(`Set ${eleName}'s Assignment`);
     } else {
       console.log(
         `Failed to find the input element with id ${elementId}, quitting`
-      )
+      );
     }
   }
 
   function enterTimeSheetData() {
-    assignmentElementIds.forEach(selectInputAndPressDownArrow)
-    timePlusButtonIds.forEach(id => simulateButtonClick(id))
+    assignmentElementIds.forEach(selectInputAndPressDownArrow);
+    timePlusButtonIds.forEach((id) => simulateButtonClick(id));
   }
 
   function hasBeenRun() {
-    var mondayAssignmentInput = document.getElementById(assignmentElementIds[0])
-    return !!mondayAssignmentInput
+    var mondayAssignmentInput = document.getElementById(
+      assignmentElementIds[0]
+    );
+    return !!mondayAssignmentInput;
   }
 
   /**
@@ -125,13 +127,13 @@
    */
 
   if (hasBeenRun()) {
-    return console.log('Hmm...Seems Hours have already been set. Exiting')
+    return console.log('Hmm...Seems Hours have already been set. Exiting');
   }
 
   // Call the function to execute
-  clickEnterRecordsButton(enterRecordsButtonId)
+  clickEnterRecordsButton(enterRecordsButtonId);
   // Wait for half a second before entering time sheet data
-  setTimeout(enterTimeSheetData, 500)
+  setTimeout(enterTimeSheetData, 500);
   // Wait for 3/4 a second before focusing the submit button
-  setTimeout(focusSubmitButton, 750)
-})()
+  setTimeout(focusSubmitButton, 750);
+})();
