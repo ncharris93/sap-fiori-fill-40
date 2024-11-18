@@ -1,4 +1,5 @@
 ;(function () {
+  var hoursPerDay = 8
   var enterRecordsButtonId =
     'application-zhcmtime-manage-component---worklist--editButton'
   var submitButtonId =
@@ -50,7 +51,6 @@
 
   function simulateDownArrow(element) {
     element.focus()
-    // Simulating a down arrow key press
     var downArrowEvent = new KeyboardEvent('keydown', {
       key: 'ArrowDown',
       code: 'ArrowDown',
@@ -60,7 +60,7 @@
     element.dispatchEvent(downArrowEvent)
   }
 
-  function simulateButtonClick(elementId, times = 8) {
+  function simulateButtonClick(elementId, times = hoursPerDay) {
     var buttonElement = document.getElementById(elementId)
     var eleName = getElementIdName(elementId)
     if (buttonElement) {
