@@ -1,0 +1,3 @@
+if git diff --cached --name-only | grep -q 'fill-time-sheet.js'; then
+  npm run build
+fi
