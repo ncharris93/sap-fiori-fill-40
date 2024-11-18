@@ -29,24 +29,39 @@ Math per 1,000 engineers:
 - 29 seconds \* 1,000 engineers = 29,000 seconds
 - 29,000 seconds / 3,600 (seconds / hr) = **8.06 hours per week.**
 
-## How to Setup
+## Setup
+
+### Arc
+
+Upload an extension
+
+1.  Get your hands on the `arc-extension` folder
+2.  From the file menu: `Extensions` » `Manage Extensions`
+3.  Toggle on `Developer mode` (top right)
+4.  Click `Load Unpacked` (top left)
+5.  Select the `arc-extension` folder
+
+Now the extension with a time sheet icon will appear in your Arc Extensions
+
+### Google Chrome
 
 Create a new bookmark
 
 1.  Give it whatever name you like
-2.  Paste the contents of `copy-me.js` into the `URL` field of the bookmark form
+2.  Paste the contents of the JS block above or `copy-me.js` into the `URL` field of the bookmark form
 
 ## How to Use
 
 1. Open the SAP FIORI timesheet page
-2. click the bookmarklet
-3. hit enter
+2. let the page finish loading
+3. click the bookmarklet
+4. hit enter
 
 ## How it works
 
 1. Will click "Enter Records"
 2. Will take the first dropdown under "Assignment" and click the "+" button under the hours 8 times
-3. It will focus the "Submit" button so you just have to hit "enter"
+3. It will focus the "Submit" button so you just have to hit "enter" at when finished
 
 ## Configuration
 
