@@ -6,7 +6,8 @@ This is intended to be used as a bookmarklet which will fill your SAP FIORI time
 
 ## TLDR;
 
-Paste this code into a Chrome bookmark.
+Paste this code into a Google Chrome bookmark.
+
 Use Arc? Keep reading.
 
 ```javascript
