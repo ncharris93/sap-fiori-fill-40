@@ -1,0 +1,20 @@
+name: Archive Artifacts
+
+on:
+  push:
+    paths:
+      - 'fill-time-sheet.js'
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Archive Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: arc-extension
+          path: arc-extension/
