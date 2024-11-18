@@ -13,7 +13,6 @@ function minify(code) {
     .trim();
 }
 
-//.replace(/\n/g, '') // Remove new lines
 // Format the code as a bookmarklet
 const bookmarkletCode = `javascript:(function() {${minify(
   fillTimeSheetCode
@@ -21,7 +20,21 @@ const bookmarkletCode = `javascript:(function() {${minify(
 
 // Write the bookmarklet code to copy-me.js
 fs.writeFileSync('copy-me.js', bookmarkletCode);
+// Write the bookmarklet code to the arc-extension
 fs.writeFileSync('arc-extension/bookmarklet.js', minify(fillTimeSheetCode));
+
+// Update the README to include the new bookmarklet code
+const readmeFilePath = 'README.md';
+let readmeContent = fs.readFileSync(readmeFilePath, 'utf8');
+
+// Replace everything between the ```s with the new bookmarklet code
+readmeContent = readmeContent.replace(
+  /```javascript\n[\s\S]*?\n```/,
+  `\`\`\`javascript\n${bookmarkletCode}\n\`\`\``
+);
+
+// Write the updated README content back to the file
+fs.writeFileSync(readmeFilePath, readmeContent);
 
 // Output the bookmarklet code to the console for reference
 console.log(bookmarkletCode);
