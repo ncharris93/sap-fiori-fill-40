@@ -167,7 +167,7 @@ Now the extension with a time sheet icon will appear in your Arc Extensions
 
 1. Create a new bookmark
 2. Give it whatever name you like
-3. Paste the contents of the JS block above or `copy-me.js` into the `URL` field of the bookmark form
+3. Paste the contents of the JS block above into the `URL` field of the bookmark form
 
 ## How to Use
 
@@ -188,11 +188,16 @@ Now the extension with a time sheet icon will appear in your Arc Extensions
 
 Default Number of Hours:
 
-- Change the number of hours entered by modifying the variable `hoursPerDay` in the `copy-me.js`
+1. Change the number of hours entered by modifying the variable `hoursPerDay` in javascript block above
+2. Paste the updated code into the Chrome Bookmarklet
+
+_Note: you will find `hoursPerDay` at the top of the file so that it's easy to modify_
 
 ### Arc
 
 Default Number of Hours:
 
-- Change the number of hours entered by modifying the variable `hoursPerDay` in the `copy-me.js`
+- Change the number of hours entered by modifying the variable `hoursPerDay` ./arc-extension/bookmarklet.js
 - [Re]upload the extension
+
+_Note: you will find `hoursPerDay` at the top of the file so that it's easy to modify_

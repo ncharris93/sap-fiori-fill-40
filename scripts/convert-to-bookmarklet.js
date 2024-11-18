@@ -9,23 +9,21 @@ function minify(code) {
   return code
     .replace(/\/\*[\s\S]*?\*\//g, '') // Remove multiline comments
     .replace(/\/\/.*$/gm, '') // Remove single-line comments
+    .replace(/\n/g, '') // Remove new lines
     .replace(/\s+/g, ' ') // Replace multiple spaces with a single space
     .trim();
 }
 
-// Format the code as a bookmarklet
-const bookmarkletCode = `javascript:(function() {${minify(
-  fillTimeSheetCode
-)}})();`;
-
-// Write the bookmarklet code to copy-me.js
-fs.writeFileSync('copy-me.js', bookmarkletCode);
 // Write the bookmarklet code to the arc-extension
 fs.writeFileSync('arc-extension/bookmarklet.js', minify(fillTimeSheetCode));
 
 // Update the README to include the new bookmarklet code
 const readmeFilePath = 'README.md';
 let readmeContent = fs.readFileSync(readmeFilePath, 'utf8');
+
+const bookmarkletCode = `javascript:(function() {${minify(
+  fillTimeSheetCode
+)}})();`;
 
 // Replace everything between the ```s with the new bookmarklet code
 readmeContent = readmeContent.replace(
