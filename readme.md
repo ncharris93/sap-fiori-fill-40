@@ -24,10 +24,10 @@ Script:
 - Clicks: 1
 - Time: 1 second
 
-Math per 1_000 engineers:
+Math per 1,000 engineers:
 
-- 29 seconds \* 1_000 engineers = 29_000 seconds
-- 29_000 seconds / 3600 (seconds / hr) = **8.06 hours per week.**
+- 29 seconds \* 1,000 engineers = 29,000 seconds
+- 29,000 seconds / 3,600 (seconds / hr) = **8.06 hours per week.**
 
 ## How to Setup
 
