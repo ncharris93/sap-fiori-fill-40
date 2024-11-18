@@ -62,13 +62,14 @@
 
   function simulateButtonClick(elementId, times = 8) {
     var buttonElement = document.getElementById(elementId)
+    var eleName = getElementIdName(elementId)
     if (buttonElement) {
       Array.from({ length: times }).forEach(() => {
         buttonElement.click()
       })
-      console.log('Button with ID ' + elementId + ' was clicked.')
+      console.log(`Set ${eleName}'s time to ${times} hours`)
     } else {
-      console.log('Failed to find button with ID ' + elementId + ', quitting')
+      console.log(`Failed to find hour increment button for ${eleName}`)
     }
   }
 
@@ -100,7 +101,7 @@
     if (inputElement) {
       simulateDownArrow(inputElement)
       simulateEnterKey(inputElement)
-      console.log(`Selected ${eleName}'s Assignment`)
+      console.log(`Set ${eleName}'s Assignment`)
     } else {
       console.log(
         `Failed to find the input element with id ${elementId}, quitting`
