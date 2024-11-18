@@ -114,6 +114,20 @@
     timePlusButtonIds.forEach(id => simulateButtonClick(id))
   }
 
+  function hasBeenRun() {
+    var mondayAssignmentInput = document.getElementById(assignmentElementIds[0])
+    return !!mondayAssignmentInput
+  }
+
+  /**
+   * Try to find the input element for Monday, If not found then we can assume
+   * that this script hasn't been run yet. If it exists, exit
+   */
+
+  if (hasBeenRun()) {
+    return console.log('Hmm...Seems Hours have already been set. Exiting')
+  }
+
   // Call the function to execute
   clickEnterRecordsButton(enterRecordsButtonId)
   // Wait for half a second before entering time sheet data
