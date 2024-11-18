@@ -6,15 +6,31 @@ on:
       - 'fill-time-sheet.js'
 
 jobs:
-  archive:
+  release:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Archive Artifacts
-        uses: actions/upload-artifact@v3
+      - name: Get Commit Messages
+        id: get_commit_messages
+        run: |
+          echo "COMMIT_MESSAGES=$(git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:'* %s')" >> $GITHUB_ENV
+
+      - name: Get Version from package.json
+        id: get_version
+        run: |
+          echo "VERSION=$(jq -r .version package.json)" >> $GITHUB_ENV
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
         with:
-          name: arc-extension
-          path: arc-extension/
+          tag_name: ${{ env.VERSION }} # Use the version from package.json
+          release_name: Release ${{ env.VERSION }}
+          body: |
+            Release notes for version ${{ env.VERSION }}
+          files: |
+            arc-extension/**
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
