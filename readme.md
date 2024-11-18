@@ -19,17 +19,17 @@ javascript:(function() {(function () { var hoursPerDay = 8; var enterRecordsButt
 Manual time entry:
 
 - Clicks: 26 (5 for each day, 1 for submission)
-- Time: 30 seconds
+- Time: 30 seconds (optimistic)
 
 Script:
 
 - Clicks: 1
-- Time: 1 second
+- Time: 5 second (pessimistic)
 
 Math per 1,000 engineers:
 
-- 29 seconds \* 1,000 engineers = 29,000 seconds
-- 29,000 seconds / 3,600 (seconds / hr) = **8.06 hours per week.**
+- 25 seconds saved \* 1,000 engineers = 25,000 seconds
+- 25,000 seconds / 3,600 (seconds / hr) = **6.94 hours per week.**
 
 ## Setup
 
