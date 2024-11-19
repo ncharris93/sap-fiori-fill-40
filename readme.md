@@ -66,24 +66,22 @@ Now the extension with a time sheet icon will appear in your Arc Extensions
 
 1. Will click "Enter Records"
 2. Will take the first dropdown under "Assignment" and click the "+" button under the hours 8 times
-3. It will focus the "Submit" button so you just have to hit "enter" at when finished
+3. It will focus the "Submit" button so you just have to hit "enter" when finished
 
 ## Configuration
 
-### Chrome
+### Default Number of Hours:
 
-Default Number of Hours:
+_Note: you will find `hoursPerDay` at the top of the file so that it's easy to modify_
+
+#### Chrome
 
 1. Change the number of hours entered by modifying the variable `hoursPerDay` in javascript block above
 2. Paste the updated code into the Chrome Bookmarklet
 
-_Note: you will find `hoursPerDay` at the top of the file so that it's easy to modify_
-
-### Arc
+#### Arc
 
 Default Number of Hours:
 
 - Change the number of hours entered by modifying the variable `hoursPerDay` ./arc-extension/bookmarklet.js
 - [Re]upload the extension
-
-_Note: you will find `hoursPerDay` at the top of the file so that it's easy to modify_
