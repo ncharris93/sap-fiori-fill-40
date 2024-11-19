@@ -1,45 +1,36 @@
 (function () {
-  var hoursPerDay = 8;
-  var enterRecordsButtonId =
-    'application-zhcmtime-manage-component---worklist--editButton';
-  var submitButtonId =
-    'application-zhcmtime-manage-component---worklist--OverviewSubmitButton';
+  const hoursPerDay = 8;
 
-  function getDailyIds(num) {
-    return {
-      assignment: `__box15-__clone${num}-inner`,
-      plusHour: `__input4-__clone${num}-incrementBtn`,
-      hourValue: `__input4-__clone${num}-input-inner`,
-    };
+  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+  const elementIdRegex = {
+    assignment: '^__box15-__clone\\d+-inner',
+    plusHour: '^__input4-__clone\\d+-incrementBtn',
+    hourValue: '^__input4-__clone\\d+-input-inner',
+  };
+
+  function findElementWithText(type, text) {
+    const elements = document.querySelectorAll(type);
+    for (let ele of elements) {
+      if (ele.textContent.trim().includes(text)) {
+        return ele;
+      }
+    }
+    return null;
   }
 
-  var DailyIds = [
-    getDailyIds(54), // Monday
-    getDailyIds(55), // Tuesday
-    getDailyIds(56), // Wednesday
-    getDailyIds(57), // Thursday
-    getDailyIds(58), // Friday
-  ];
-
-  function getElementIdName(elementId) {
-    switch (true) {
-      case elementId.includes('54'):
-        return 'Monday';
-      case elementId.includes('55'):
-        return 'Tuesday';
-      case elementId.includes('56'):
-        return 'Wednesday';
-      case elementId.includes('57'):
-        return 'Thursday';
-      case elementId.includes('58'):
-        return 'Friday';
-      default:
-        return 'You working weekends or something?';
+  function findChildWithIdPattern(tr, pattern) {
+    const regex = new RegExp(pattern);
+    const elements = tr.querySelectorAll('*'); // Get all child elements
+    for (let element of elements) {
+      if (regex.test(element.id)) {
+        return element;
+      }
     }
+    return null;
   }
 
   function simulateEnterKey(element) {
-    var enterEvent = new KeyboardEvent('keydown', {
+    const enterEvent = new KeyboardEvent('keydown', {
       key: 'Enter',
       code: 'Enter',
       keyCode: 13,
@@ -51,7 +42,7 @@
 
   function simulateDownArrow(element) {
     element.focus();
-    var downArrowEvent = new KeyboardEvent('keydown', {
+    const downArrowEvent = new KeyboardEvent('keydown', {
       key: 'ArrowDown',
       code: 'ArrowDown',
       keyCode: 40,
@@ -60,27 +51,24 @@
     element.dispatchEvent(downArrowEvent);
   }
 
-  function enterDailyHours(plusButtonElementId, hourValueId) {
-    var buttonElement = document.getElementById(plusButtonElementId);
-    var hourValueElement = document.getElementById(hourValueId);
-    var eleName = getElementIdName(plusButtonElementId);
+  function enterDailyHours({ day, plusButtonElementId, hourValueId }) {
+    const buttonElement = document.getElementById(plusButtonElementId);
+    const hourValueElement = document.getElementById(hourValueId);
     if (hourValueElement.value !== '0.00') {
-      return console.warn(`Not overwriting hours for ${eleName}. Skipping.`);
+      return console.warn(`Not overwriting hours for ${day}`);
     }
     if (buttonElement) {
       Array.from({ length: hoursPerDay }).forEach(() => {
         buttonElement.click();
       });
-      console.log(
-        `Set ${eleName}'s time to ${hoursPerDay} hours. (+${hoursPerDay})`
-      );
+      console.log(`Set ${day}'s time to ${hoursPerDay} hours`);
     } else {
-      console.warn(`Failed to find hour increment button for ${eleName}`);
+      console.warn(`Failed to find hour increment button for ${day}`);
     }
   }
 
   function focusSubmitButton() {
-    var submitButton = document.getElementById(submitButtonId);
+    const submitButton = findElementWithText('button', 'Submit');
     if (submitButton) {
       submitButton.focus();
       console.log('Submit Button Focused');
@@ -89,8 +77,8 @@
     }
   }
 
-  function clickEnterRecordsButton(elementId) {
-    var enterRecordsButton = document.getElementById(elementId);
+  function clickEnterRecordsButton() {
+    const enterRecordsButton = findElementWithText('button', 'Enter Records');
     if (enterRecordsButton) {
       enterRecordsButton.click();
       console.log('clicked Enter Records button!');
@@ -100,38 +88,79 @@
     }
   }
 
-  function enterWorkAssignment(elementId) {
-    var eleName = getElementIdName(elementId);
-    var inputElement = document.getElementById(elementId);
+  function enterWorkAssignment(day, elementId) {
+    const inputElement = document.getElementById(elementId);
     // don't set the value if it already exists
-    if (inputElement && inputElement.value.trim() === '') {
+    if (!inputElement) {
+      console.warn(`Failed to find the input for ${day}'s assignment`);
+    } else if (inputElement.value.trim() !== '') {
+      console.warn(`Not overwriting assignment for ${day} `);
+    } else {
       simulateDownArrow(inputElement);
       simulateEnterKey(inputElement);
-      console.log(`Set ${eleName}'s Assignment`);
-    } else {
-      console.warn(`Failed to find the input for ${eleName}'s assignment`);
+      console.log(`Set ${day}'s Assignment`);
     }
-  }
-
-  function enterTimeSheetData() {
-    DailyIds.forEach((day) => {
-      enterWorkAssignment(day.assignment);
-      enterDailyHours(day.plusHour, day.hourValue);
-    });
   }
 
   function pollForElement() {
-    var mondayAssignmentInput = document.getElementById(DailyIds[0].assignment);
-    if (mondayAssignmentInput) {
-      console.log('Able to enter records, proceeding with assignment.');
-      enterTimeSheetData();
-      setTimeout(() => focusSubmitButton(), 250);
-    } else {
+    const mondayRow = findElementWithText('tr', 'Monday');
+    if (!mondayRow) {
       console.log("Can't enter records yet, retrying in 250...");
-      setTimeout(pollForElement, 250);
+      return setTimeout(pollForElement, 250);
+    }
+    const mondayAssignmentElement = findChildWithIdPattern(
+      mondayRow.nextElementSibling,
+      elementIdRegex.assignment
+    );
+    if (!mondayAssignmentElement) {
+      console.warn(
+        'Monday row available, but not inputs not ready yet, retrying in 250...'
+      );
+      return setTimeout(pollForElement, 250);
+    }
+
+    console.log('Able to enter records, proceeding with assignment.');
+    days.forEach(fillOutDay);
+    setTimeout(focusSubmitButton, 250);
+  }
+
+  function fillOutDay(day) {
+    console.log(`Filling out ${day}`);
+    const dayTableRow = findElementWithText('tr', day);
+    const nextRow = dayTableRow.nextElementSibling;
+
+    if (!nextRow) {
+      return console.warn(`Can't find row to fill out data for ${day}`);
+    }
+    const assignmentNode = findChildWithIdPattern(
+      nextRow,
+      elementIdRegex.assignment
+    );
+    if (assignmentNode) {
+      enterWorkAssignment(day, assignmentNode.id);
+    } else {
+      console.warn(`Can't find Assignment field, skipping.`);
+    }
+
+    const hourValueNode = findChildWithIdPattern(
+      nextRow,
+      elementIdRegex.hourValue
+    );
+    const hourPlusButtonNode = findChildWithIdPattern(
+      nextRow,
+      elementIdRegex.plusHour
+    );
+    if (hourPlusButtonNode) {
+      enterDailyHours({
+        day,
+        plusButtonElementId: hourPlusButtonNode.id,
+        hourValueId: hourValueNode.id,
+      });
+    } else {
+      console.warn(`Can't find Hours field, skipping.`);
     }
   }
 
+  clickEnterRecordsButton();
   pollForElement();
-  clickEnterRecordsButton(enterRecordsButtonId);
 })();
