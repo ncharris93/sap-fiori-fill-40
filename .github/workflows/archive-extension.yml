@@ -15,6 +15,9 @@ jobs:
       - name: Get Commit Messages
         id: get_commit_messages
         run: |
+          # Enable debugging
+          set -x
+
           # Fetch all tags
           git fetch --tags -f
 
@@ -26,20 +29,25 @@ jobs:
           echo "Last Tag: $last_tag"
           echo "Previous Tag: $previous_tag"
 
-          # Get commit messages between the last two tags
-          commit_messages=$(git log ${previous_tag}..${last_tag} --pretty=format:'* %s')
-          if [ -z "$commit_messages" ]; then
-            echo "COMMIT_MESSAGES='No new commits'" >> $GITHUB_ENV
+          if [ -z "$previous_tag" ] || [ -z "$last_tag" ]; then
+            echo "COMMIT_MESSAGES='No tags found'" >> $GITHUB_ENV
           else
-            echo "COMMIT_MESSAGES<<EOF" >> $GITHUB_ENV
-            echo "$commit_messages" >> $GITHUB_ENV
-            echo "EOF" >> $GITHUB_ENV          
-
-            echo env:
-            echo $GITHUB_ENV
-            echo msgs:
-            echo "$commit_messages"
+            # Get commit messages between the last two tags
+            commit_messages=$(git log ${previous_tag}..${last_tag} --pretty=format:'* %s')
+            
+            if [ -z "$commit_messages" ]; then
+              echo "COMMIT_MESSAGES='No new commits'" >> $GITHUB_ENV
+            else
+              # Write multi-line commit messages to $GITHUB_ENV
+              echo "COMMIT_MESSAGES<<EOF" >> $GITHUB_ENV
+              echo "$commit_messages" >> $GITHUB_ENV
+              echo "EOF" >> $GITHUB_ENV
+            fi
           fi
+
+          # Debug: Print the environment file to verify
+          echo "=== GITHUB_ENV ==="
+          cat $GITHUB_ENV
 
       - name: Get Version from package.json
         id: get_version
