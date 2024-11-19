@@ -1,6 +1,6 @@
 # SAP FIORI Fill 40
 
-<div style="width: 100%; text-align: center; margin: 0;">
+<div style="display: flex; justify-content: center; width: 100%;">
    <img src="./arc-extension/icon-128.png" alt="Icon" />
 </div>
 
