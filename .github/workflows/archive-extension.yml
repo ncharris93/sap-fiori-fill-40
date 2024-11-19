@@ -29,7 +29,8 @@ jobs:
           echo "Previous Tag: $previous_tag"
 
           # Include commits reachable from the previous tag
-          commit_messages=$(git log ${previous_tag}..${last_tag} --pretty=format:'* %s')
+          # Skip the most recent commit (version bump)
+          commit_messages=$(git log ${previous_tag}..${last_tag} --pretty=format:'* %s' | sed '1d')
 
           if [ -z "$commit_messages" ]; then
             echo "COMMIT_MESSAGES='No new commits'" >> $GITHUB_ENV
@@ -61,7 +62,7 @@ jobs:
           body: |
             Release notes for v${{ env.VERSION }}
             ## Changes since last release
-            "${{ env.COMMIT_MESSAGES }}"
+            ${{ env.COMMIT_MESSAGES }}
           files: |
             arc-extension.zip
         env:
