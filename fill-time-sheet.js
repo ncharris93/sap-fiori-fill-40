@@ -57,14 +57,11 @@
     if (hourValueElement.value !== '0.00') {
       return console.warn(`Not overwriting hours for ${day}`);
     }
-    if (buttonElement) {
-      Array.from({ length: hoursPerDay }).forEach(() => {
-        buttonElement.click();
-      });
-      console.log(`Set ${day}'s time to ${hoursPerDay} hours`);
-    } else {
-      console.warn(`Failed to find hour increment button for ${day}`);
+    if (!buttonElement) {
+      return console.warn(`Failed to find hour increment button for ${day}`);
     }
+    Array.from({ length: hoursPerDay }).forEach(() => buttonElement.click());
+    console.log(`Set ${day}'s time to ${hoursPerDay} hours`);
   }
 
   function focusSubmitButton() {
@@ -79,27 +76,26 @@
 
   function clickEnterRecordsButton() {
     const enterRecordsButton = findElementWithText('button', 'Enter Records');
-    if (enterRecordsButton) {
-      enterRecordsButton.click();
-      console.log('clicked Enter Records button!');
-      simulateEnterKey(enterRecordsButton);
-    } else {
-      console.warn('Failed to find Enter Records button');
+    if (!enterRecordsButton) {
+      return console.warn('Failed to find Enter Records button');
     }
+    enterRecordsButton.click();
+    console.log('clicked Enter Records button!');
+    simulateEnterKey(enterRecordsButton);
   }
 
   function enterWorkAssignment(day, elementId) {
     const inputElement = document.getElementById(elementId);
     // don't set the value if it already exists
     if (!inputElement) {
-      console.warn(`Failed to find the input for ${day}'s assignment`);
-    } else if (inputElement.value.trim() !== '') {
-      console.warn(`Not overwriting assignment for ${day} `);
-    } else {
-      simulateDownArrow(inputElement);
-      simulateEnterKey(inputElement);
-      console.log(`Set ${day}'s Assignment`);
+      return console.warn(`Failed to find the input for ${day}'s assignment`);
     }
+    if (inputElement.value.trim() !== '') {
+      return console.warn(`Not overwriting assignment for ${day} `);
+    }
+    simulateDownArrow(inputElement);
+    simulateEnterKey(inputElement);
+    console.log(`Set ${day}'s Assignment`);
   }
 
   function pollForElement() {
