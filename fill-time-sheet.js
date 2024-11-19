@@ -1,5 +1,6 @@
 (function () {
   var hoursPerDay = 8;
+
   var enterRecordsButtonId =
     'application-zhcmtime-manage-component---worklist--editButton';
   var submitButtonId =
