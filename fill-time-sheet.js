@@ -3,7 +3,6 @@
 
   var enterRecordsButtonId =
     'application-zhcmtime-manage-component---worklist--editButton';
-
   var submitButtonId =
     'application-zhcmtime-manage-component---worklist--OverviewSubmitButton';
 
