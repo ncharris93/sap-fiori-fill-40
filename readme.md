@@ -8,7 +8,7 @@ This is intended to be used as a bookmarklet which will fill your SAP FIORI time
 
 ### Arc
 
-Download the latest extension from the [releasees](https://github.com/ncharris93/sap-fiori-fill-40/releases)
+Download the latest extension from the [releases](https://github.com/ncharris93/sap-fiori-fill-40/releases)
 
 ### Google Chrome
 Paste this code into a Google Chrome bookmark.
