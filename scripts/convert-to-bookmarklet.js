@@ -27,8 +27,8 @@ const bookmarkletCode = `javascript:(function() {${minify(
 
 // Replace everything between the ```s with the new bookmarklet code
 readmeContent = readmeContent.replace(
-  /```javascript\n[\s\S]*?\n```/,
-  `\`\`\`javascript\n${bookmarkletCode}\n\`\`\``
+  /```markdown\n[\s\S]*?\n```/,
+  `\`\`\`markdown\n${bookmarkletCode}\n\`\`\``
 );
 
 // Write the updated README content back to the file
