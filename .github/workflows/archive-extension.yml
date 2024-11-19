@@ -31,7 +31,7 @@ jobs:
           if [ -z "$commit_messages" ]; then
             echo "COMMIT_MESSAGES='No new commits'" >> $GITHUB_ENV
           else
-            echo "COMMIT_MESSAGES=$commit_messages" >> $GITHUB_ENV
+            echo -e "COMMIT_MESSAGES<<EOF\n$commit_messages\nEOF" >> $GITHUB_ENV
           fi
 
       - name: Get Version from package.json
