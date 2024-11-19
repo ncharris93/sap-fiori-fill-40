@@ -15,12 +15,14 @@ jobs:
       - name: Get Commit Messages
         id: get_commit_messages
         run: |
+          # Fetch all tags and new commits
+          git fetch --tags
           last_tag=$(git describe --tags --abbrev=0)
           echo "Last Tag: $last_tag"
+
           commit_messages=$(git log ${last_tag}..HEAD --pretty=format:'* %s')
           if [ -z "$commit_messages" ]; then
-            echo "No new commits since last tag." >> $GITHUB_ENV
-            echo "COMMIT_MESSAGES=No new commits" >> $GITHUB_ENV
+            echo "COMMIT_MESSAGES='No new commits'" >> $GITHUB_ENV
           else
             echo "COMMIT_MESSAGES=$commit_messages" >> $GITHUB_ENV
           fi
