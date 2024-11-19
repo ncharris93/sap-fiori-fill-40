@@ -19,5 +19,5 @@ if git diff-tree --no-commit-id --name-only -r HEAD | grep -q 'fill-time-sheet.j
       npm version "$bump_type"
    fi
 
-   git add .
+   git push origin HEAD --follow-tags
 fi
