@@ -1,25 +1,25 @@
 get_version_bump() {
-  if git log -1 --pretty=%B | grep -qE 'break:|break\([^)]+\):'; then
-    echo "major"
-  elif git log -1 --pretty=%B | grep -qE 'feat:|feat\([^)]+\):'; then
-    echo "minor"
-  elif git log -1 --pretty=%B | grep -qE 'fix:|fix\([^)]+\):'; then
-    echo "patch"
-  else
-    echo "none"
-  fi
+   if git log -1 --pretty=%B | grep -qE 'break:|break\([^)]+\):'; then
+      echo "major"
+   elif git log -1 --pretty=%B | grep -qE 'feat:|feat\([^)]+\):'; then
+      echo "minor"
+   elif git log -1 --pretty=%B | grep -qE 'fix:|fix\([^)]+\):'; then
+      echo "patch"
+   else
+      echo "none"
+   fi
 }
 
-
 if git diff --cached --name-only | grep -q 'fill-time-sheet.js'; then
-  npm run build
+   npm run build
 
-  # Get the version bump type
-  bump_type=$(get_version_bump)
-  if [ "$bump_type" != "none" ]; then
-    npm version "$bump_type"
-  fi
+   # Get the version bump type
+   bump_type=$(get_version_bump)
+   if [ "$bump_type" != "none" ]; then
+      echo "bumping \"$bump_type\" version"
+      npm version "$bump_type" --no-git-tag-version
+   fi
 
-  # Add any updated files to the commit
-  git add .
+   # Add any updated files to the commit
+   git add .
 fi
