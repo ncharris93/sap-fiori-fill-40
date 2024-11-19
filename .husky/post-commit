@@ -16,8 +16,18 @@ if git diff-tree --no-commit-id --name-only -r HEAD | grep -q 'fill-time-sheet.j
    bump_type=$(get_version_bump)
    if [ "$bump_type" != "none" ]; then
       echo "bumping \"$bump_type\" version"
-      npm version "$bump_type"
-   fi
 
-   git push origin HEAD --follow-tags
+      # Capture the output of npm version which includes the new version tag
+      new_tag=$(npm version "$bump_type" | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+')
+
+      # Push the commit
+      git push origin HEAD
+
+      # Push the newly created tag
+      if [ -n "$new_tag" ]; then
+         git push origin "$new_tag"
+      else
+         echo "No new tag created."
+      fi
+   fi
 fi
