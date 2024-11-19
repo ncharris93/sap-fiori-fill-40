@@ -1,6 +1,6 @@
 {
   "name": "one-click-timesheet",
-  "version": "1.1.17",
+  "version": "1.1.18",
   "description": "## What it is",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
