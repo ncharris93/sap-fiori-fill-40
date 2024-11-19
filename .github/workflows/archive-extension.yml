@@ -15,7 +15,6 @@ jobs:
       - name: Get Commit Messages
         id: get_commit_messages
         run: |
-          # Enable debugging
           set -x
 
           # Fetch all tags
@@ -32,20 +31,23 @@ jobs:
           if [ -z "$previous_tag" ] || [ -z "$last_tag" ]; then
             echo "COMMIT_MESSAGES='No tags found'" >> $GITHUB_ENV
           else
-            # Get commit messages between the last two tags
-            commit_messages=$(git log ${previous_tag}..${last_tag} --pretty=format:'* %s')
-            
+            # Include commits reachable from the previous tag
+            commit_messages=$(git log ${previous_tag}^..${last_tag} --pretty=format:'* %s')
+
             if [ -z "$commit_messages" ]; then
               echo "COMMIT_MESSAGES='No new commits'" >> $GITHUB_ENV
             else
-              # Write multi-line commit messages to $GITHUB_ENV
               echo "COMMIT_MESSAGES<<EOF" >> $GITHUB_ENV
               echo "$commit_messages" >> $GITHUB_ENV
               echo "EOF" >> $GITHUB_ENV
             fi
           fi
 
-          # Debug: Print the environment file to verify
+          # Debugging output
+          echo "Commits between ${previous_tag} and ${last_tag}:"
+          git log ${previous_tag}^..${last_tag} --oneline
+
+          # Verify environment variable
           echo "=== GITHUB_ENV ==="
           cat $GITHUB_ENV
 
