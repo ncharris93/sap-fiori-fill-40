@@ -27,7 +27,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.VERSION }} # Use the version from package.json
-          release_name: Release ${{ env.VERSION }}
+          name: Release ${{ env.VERSION }}
           body: |
             Release notes for version ${{ env.VERSION }}
             ## Changes since last release
