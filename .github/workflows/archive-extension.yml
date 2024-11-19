@@ -12,16 +12,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Wait for Tag Creation
-        run: |
-          # Assuming the tag is created immediately, wait for a moment
-          sleep 10  # Adjust time as necessary
-
       - name: Get Commit Messages
         id: get_commit_messages
         run: |
           # Fetch all tags
-          git fetch --tags
+          git fetch --tags -f
 
           # Get the last two tags
           tags=$(git tag --sort=-creatordate | head -n 2)
