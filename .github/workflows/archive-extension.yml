@@ -2,8 +2,8 @@ name: Archive Artifacts
 
 on:
   push:
-    paths:
-      - 'fill-time-sheet.js'
+    tags:
+      - 'v*'
 
 jobs:
   release:

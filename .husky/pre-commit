@@ -17,7 +17,7 @@ if git diff --cached --name-only | grep -q 'fill-time-sheet.js'; then
    bump_type=$(get_version_bump)
    if [ "$bump_type" != "none" ]; then
       echo "bumping \"$bump_type\" version"
-      npm version "$bump_type" --no-git-tag-version
+      npm version "$bump_type"
    fi
 
    # Add any updated files to the commit
