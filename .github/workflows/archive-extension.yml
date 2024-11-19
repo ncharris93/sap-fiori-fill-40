@@ -34,6 +34,11 @@ jobs:
             echo "COMMIT_MESSAGES<<EOF" >> $GITHUB_ENV
             echo "$commit_messages" >> $GITHUB_ENV
             echo "EOF" >> $GITHUB_ENV          
+
+            echo env:
+            echo $GITHUB_ENV
+            echo msgs:
+            echo "$commit_messages"
           fi
 
       - name: Get Version from package.json
