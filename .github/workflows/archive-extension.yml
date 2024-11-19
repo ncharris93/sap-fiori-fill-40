@@ -12,6 +12,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Wait for Tag Creation
+        run: |
+          # Assuming the tag is created immediately, wait for a moment
+          sleep 10  # Adjust time as necessary
+
       - name: Get Commit Messages
         id: get_commit_messages
         run: |
