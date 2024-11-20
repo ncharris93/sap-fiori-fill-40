@@ -80,12 +80,12 @@ Now the extension with a time sheet icon will appear in your Arc Extensions
 
 _Note: you will find `hoursPerDay` at the top of the file so that it's easy to modify_
 
-#### Chrome
-
-1. Modifying the variable `hoursPerDay` in javascript block above
-2. Paste the updated code into the Chrome Bookmarklet
-
 #### Arc
 
 - Modify the variable `hoursPerDay` found in `./arc-extension/bookmarklet.js`
 - [Re]upload the extension
+
+#### Chrome
+
+1. Modifying the variable `hoursPerDay` in javascript block above
+2. Paste the updated code into the Chrome Bookmarklet
