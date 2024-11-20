@@ -76,32 +76,21 @@ Now the extension with a time sheet icon will appear in your Arc Extensions
 
 ## Configuration
 
-### Default Number of Hours:
+_Note: you will find config vars at the beginning of the code so that they're easy to locate_
 
-_Note: you will find `hoursPerDay` at the top of the file so that it's easy to modify_
-Change this value to tweak how many hours per day are entered.
+### Arc
 
-#### Arc
+- Modify the value(s) found in `./arc-extension/bookmarklet.js`
+- [Re]install the extension
 
-- Modify the variable `hoursPerDay` found in `./arc-extension/bookmarklet.js`
-- [Re]upload the extension
+### Chrome
 
-#### Chrome
+- Modify the value(s) found in the code block at the top of this readme
+- Paste the updated code into the Chrome Bookmarklet
 
-1. Modifying the variable `hoursPerDay` in javascript block above
-2. Paste the updated code into the Chrome Bookmarklet
+### Values to Change
 
-### Default WBS Selection
-
-_Note: you will find `assingmentNum` at the top of the file so that it's easy to modify_
-Change this value to select a different default WBS element. 1 = first, 2 = second, etc
-
-#### Arc
-
-- Modify the variable `assignmentNum` found in `./arc-extension/bookmarklet.js`
-- [Re]upload the extension
-
-#### Chrome
-
-1. Modifying the variable `assignmentNum` in javascript block above
-2. Paste the updated code into the Chrome Bookmarklet
+| **Value**       | **Default** | **Description**                    |
+| --------------- | ----------- | ---------------------------------- |
+| `hoursPerDay`   | 8           | How many hours per day are entered |
+| `assignmentNum` | 1           | Which WBS element is selected      |
