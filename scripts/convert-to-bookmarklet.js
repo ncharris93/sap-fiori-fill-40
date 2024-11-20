@@ -21,9 +21,7 @@ fs.writeFileSync('arc-extension/bookmarklet.js', minify(fillTimeSheetCode));
 const readmeFilePath = 'README.md';
 let readmeContent = fs.readFileSync(readmeFilePath, 'utf8');
 
-const bookmarkletCode = `javascript:(function() {${minify(
-  fillTimeSheetCode
-)}})();`;
+const bookmarkletCode = `javascript:${minify(fillTimeSheetCode)}`;
 
 // Replace everything between the ```s with the new bookmarklet code
 readmeContent = readmeContent.replace(
